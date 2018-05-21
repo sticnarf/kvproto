@@ -5539,7 +5539,7 @@ impl ::protobuf::reflect::ProtobufValue for HoldSnapshotRequest {
 #[derive(PartialEq,Clone,Default)]
 pub struct HoldSnapshotResponse {
     // message fields
-    pub snapshot_id: ::std::string::String,
+    pub snapshot_id: u64,
     // special fields
     unknown_fields: ::protobuf::UnknownFields,
     cached_size: ::protobuf::CachedSize,
@@ -5563,37 +5563,26 @@ impl HoldSnapshotResponse {
         }
     }
 
-    // string snapshot_id = 1;
+    // uint64 snapshot_id = 1;
 
     pub fn clear_snapshot_id(&mut self) {
-        self.snapshot_id.clear();
+        self.snapshot_id = 0;
     }
 
     // Param is passed by value, moved
-    pub fn set_snapshot_id(&mut self, v: ::std::string::String) {
+    pub fn set_snapshot_id(&mut self, v: u64) {
         self.snapshot_id = v;
     }
 
-    // Mutable pointer to the field.
-    // If field is not initialized, it is initialized with default value first.
-    pub fn mut_snapshot_id(&mut self) -> &mut ::std::string::String {
-        &mut self.snapshot_id
+    pub fn get_snapshot_id(&self) -> u64 {
+        self.snapshot_id
     }
 
-    // Take field
-    pub fn take_snapshot_id(&mut self) -> ::std::string::String {
-        ::std::mem::replace(&mut self.snapshot_id, ::std::string::String::new())
-    }
-
-    pub fn get_snapshot_id(&self) -> &str {
+    fn get_snapshot_id_for_reflect(&self) -> &u64 {
         &self.snapshot_id
     }
 
-    fn get_snapshot_id_for_reflect(&self) -> &::std::string::String {
-        &self.snapshot_id
-    }
-
-    fn mut_snapshot_id_for_reflect(&mut self) -> &mut ::std::string::String {
+    fn mut_snapshot_id_for_reflect(&mut self) -> &mut u64 {
         &mut self.snapshot_id
     }
 }
@@ -5608,7 +5597,11 @@ impl ::protobuf::Message for HoldSnapshotResponse {
             let (field_number, wire_type) = is.read_tag_unpack()?;
             match field_number {
                 1 => {
-                    ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.snapshot_id)?;
+                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
+                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
+                    }
+                    let tmp = is.read_uint64()?;
+                    self.snapshot_id = tmp;
                 },
                 _ => {
                     ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
@@ -5622,8 +5615,8 @@ impl ::protobuf::Message for HoldSnapshotResponse {
     #[allow(unused_variables)]
     fn compute_size(&self) -> u32 {
         let mut my_size = 0;
-        if !self.snapshot_id.is_empty() {
-            my_size += ::protobuf::rt::string_size(1, &self.snapshot_id);
+        if self.snapshot_id != 0 {
+            my_size += ::protobuf::rt::value_size(1, self.snapshot_id, ::protobuf::wire_format::WireTypeVarint);
         }
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
@@ -5631,8 +5624,8 @@ impl ::protobuf::Message for HoldSnapshotResponse {
     }
 
     fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream) -> ::protobuf::ProtobufResult<()> {
-        if !self.snapshot_id.is_empty() {
-            os.write_string(1, &self.snapshot_id)?;
+        if self.snapshot_id != 0 {
+            os.write_uint64(1, self.snapshot_id)?;
         }
         os.write_unknown_fields(self.get_unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -5678,7 +5671,7 @@ impl ::protobuf::MessageStatic for HoldSnapshotResponse {
         unsafe {
             descriptor.get(|| {
                 let mut fields = ::std::vec::Vec::new();
-                fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
+                fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeUint64>(
                     "snapshot_id",
                     HoldSnapshotResponse::get_snapshot_id_for_reflect,
                     HoldSnapshotResponse::mut_snapshot_id_for_reflect,
@@ -5715,7 +5708,7 @@ impl ::protobuf::reflect::ProtobufValue for HoldSnapshotResponse {
 #[derive(PartialEq,Clone,Default)]
 pub struct ReleaseSnapshotRequest {
     // message fields
-    pub snapshot_id: ::std::string::String,
+    pub snapshot_id: u64,
     // special fields
     unknown_fields: ::protobuf::UnknownFields,
     cached_size: ::protobuf::CachedSize,
@@ -5739,37 +5732,26 @@ impl ReleaseSnapshotRequest {
         }
     }
 
-    // string snapshot_id = 1;
+    // uint64 snapshot_id = 1;
 
     pub fn clear_snapshot_id(&mut self) {
-        self.snapshot_id.clear();
+        self.snapshot_id = 0;
     }
 
     // Param is passed by value, moved
-    pub fn set_snapshot_id(&mut self, v: ::std::string::String) {
+    pub fn set_snapshot_id(&mut self, v: u64) {
         self.snapshot_id = v;
     }
 
-    // Mutable pointer to the field.
-    // If field is not initialized, it is initialized with default value first.
-    pub fn mut_snapshot_id(&mut self) -> &mut ::std::string::String {
-        &mut self.snapshot_id
+    pub fn get_snapshot_id(&self) -> u64 {
+        self.snapshot_id
     }
 
-    // Take field
-    pub fn take_snapshot_id(&mut self) -> ::std::string::String {
-        ::std::mem::replace(&mut self.snapshot_id, ::std::string::String::new())
-    }
-
-    pub fn get_snapshot_id(&self) -> &str {
+    fn get_snapshot_id_for_reflect(&self) -> &u64 {
         &self.snapshot_id
     }
 
-    fn get_snapshot_id_for_reflect(&self) -> &::std::string::String {
-        &self.snapshot_id
-    }
-
-    fn mut_snapshot_id_for_reflect(&mut self) -> &mut ::std::string::String {
+    fn mut_snapshot_id_for_reflect(&mut self) -> &mut u64 {
         &mut self.snapshot_id
     }
 }
@@ -5784,7 +5766,11 @@ impl ::protobuf::Message for ReleaseSnapshotRequest {
             let (field_number, wire_type) = is.read_tag_unpack()?;
             match field_number {
                 1 => {
-                    ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.snapshot_id)?;
+                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
+                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
+                    }
+                    let tmp = is.read_uint64()?;
+                    self.snapshot_id = tmp;
                 },
                 _ => {
                     ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
@@ -5798,8 +5784,8 @@ impl ::protobuf::Message for ReleaseSnapshotRequest {
     #[allow(unused_variables)]
     fn compute_size(&self) -> u32 {
         let mut my_size = 0;
-        if !self.snapshot_id.is_empty() {
-            my_size += ::protobuf::rt::string_size(1, &self.snapshot_id);
+        if self.snapshot_id != 0 {
+            my_size += ::protobuf::rt::value_size(1, self.snapshot_id, ::protobuf::wire_format::WireTypeVarint);
         }
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
@@ -5807,8 +5793,8 @@ impl ::protobuf::Message for ReleaseSnapshotRequest {
     }
 
     fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream) -> ::protobuf::ProtobufResult<()> {
-        if !self.snapshot_id.is_empty() {
-            os.write_string(1, &self.snapshot_id)?;
+        if self.snapshot_id != 0 {
+            os.write_uint64(1, self.snapshot_id)?;
         }
         os.write_unknown_fields(self.get_unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -5854,7 +5840,7 @@ impl ::protobuf::MessageStatic for ReleaseSnapshotRequest {
         unsafe {
             descriptor.get(|| {
                 let mut fields = ::std::vec::Vec::new();
-                fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
+                fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeUint64>(
                     "snapshot_id",
                     ReleaseSnapshotRequest::get_snapshot_id_for_reflect,
                     ReleaseSnapshotRequest::mut_snapshot_id_for_reflect,
@@ -6246,22 +6232,22 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     \x0bconfigValue\"\x1a\n\x18ModifyTikvConfigResponse\"A\n\x13HoldSnapshot\
     Request\x12*\n\x07context\x18\x01\x20\x01(\x0b2\x10.kvrpcpb.ContextR\x07\
     context\"7\n\x14HoldSnapshotResponse\x12\x1f\n\x0bsnapshot_id\x18\x01\
-    \x20\x01(\tR\nsnapshotId\"9\n\x16ReleaseSnapshotRequest\x12\x1f\n\x0bsna\
-    pshot_id\x18\x01\x20\x01(\tR\nsnapshotId\"3\n\x17ReleaseSnapshotResponse\
-    \x12\x18\n\x07removed\x18\x01\x20\x01(\x08R\x07removed*#\n\x02DB\x12\x0b\
-    \n\x07INVALID\x10\0\x12\x06\n\x02KV\x10\x01\x12\x08\n\x04RAFT\x10\x02*\
-    \x90\x01\n\x06MODULE\x12\n\n\x06UNUSED\x10\0\x12\x08\n\x04KVDB\x10\x01\
-    \x12\n\n\x06RAFTDB\x10\x02\x12\x0c\n\x08READPOOL\x10\x03\x12\n\n\x06SERV\
-    ER\x10\x04\x12\x0b\n\x07STORAGE\x10\x05\x12\x06\n\x02PD\x10\x06\x12\n\n\
-    \x06METRIC\x10\x07\x12\x0f\n\x0bCOPROCESSOR\x10\x08\x12\x0c\n\x08SECURIT\
-    Y\x10\t\x12\n\n\x06IMPORT\x10\n2\xd2\x08\n\x05Debug\x122\n\x03Get\x12\
-    \x13.debugpb.GetRequest\x1a\x14.debugpb.GetResponse\"\0\x12>\n\x07RaftLo\
-    g\x12\x17.debugpb.RaftLogRequest\x1a\x18.debugpb.RaftLogResponse\"\0\x12\
-    G\n\nRegionInfo\x12\x1a.debugpb.RegionInfoRequest\x1a\x1b.debugpb.Region\
-    InfoResponse\"\0\x12G\n\nRegionSize\x12\x1a.debugpb.RegionSizeRequest\
-    \x1a\x1b.debugpb.RegionSizeResponse\"\0\x12C\n\x08ScanMvcc\x12\x18.debug\
-    pb.ScanMvccRequest\x1a\x19.debugpb.ScanMvccResponse\"\00\x01\x12>\n\x07C\
-    ompact\x12\x17.debugpb.CompactRequest\x1a\x18.debugpb.CompactResponse\"\
+    \x20\x01(\x04R\nsnapshotId\"9\n\x16ReleaseSnapshotRequest\x12\x1f\n\x0bs\
+    napshot_id\x18\x01\x20\x01(\x04R\nsnapshotId\"3\n\x17ReleaseSnapshotResp\
+    onse\x12\x18\n\x07removed\x18\x01\x20\x01(\x08R\x07removed*#\n\x02DB\x12\
+    \x0b\n\x07INVALID\x10\0\x12\x06\n\x02KV\x10\x01\x12\x08\n\x04RAFT\x10\
+    \x02*\x90\x01\n\x06MODULE\x12\n\n\x06UNUSED\x10\0\x12\x08\n\x04KVDB\x10\
+    \x01\x12\n\n\x06RAFTDB\x10\x02\x12\x0c\n\x08READPOOL\x10\x03\x12\n\n\x06\
+    SERVER\x10\x04\x12\x0b\n\x07STORAGE\x10\x05\x12\x06\n\x02PD\x10\x06\x12\
+    \n\n\x06METRIC\x10\x07\x12\x0f\n\x0bCOPROCESSOR\x10\x08\x12\x0c\n\x08SEC\
+    URITY\x10\t\x12\n\n\x06IMPORT\x10\n2\xd2\x08\n\x05Debug\x122\n\x03Get\
+    \x12\x13.debugpb.GetRequest\x1a\x14.debugpb.GetResponse\"\0\x12>\n\x07Ra\
+    ftLog\x12\x17.debugpb.RaftLogRequest\x1a\x18.debugpb.RaftLogResponse\"\0\
+    \x12G\n\nRegionInfo\x12\x1a.debugpb.RegionInfoRequest\x1a\x1b.debugpb.Re\
+    gionInfoResponse\"\0\x12G\n\nRegionSize\x12\x1a.debugpb.RegionSizeReques\
+    t\x1a\x1b.debugpb.RegionSizeResponse\"\0\x12C\n\x08ScanMvcc\x12\x18.debu\
+    gpb.ScanMvccRequest\x1a\x19.debugpb.ScanMvccResponse\"\00\x01\x12>\n\x07\
+    Compact\x12\x17.debugpb.CompactRequest\x1a\x18.debugpb.CompactResponse\"\
     \0\x12V\n\x0fInjectFailPoint\x12\x1f.debugpb.InjectFailPointRequest\x1a\
     \x20.debugpb.InjectFailPointResponse\"\0\x12Y\n\x10RecoverFailPoint\x12\
     \x20.debugpb.RecoverFailPointRequest\x1a!.debugpb.RecoverFailPointRespon\
@@ -6274,8 +6260,8 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     gResponse\"\0\x12M\n\x0cHoldSnapshot\x12\x1c.debugpb.HoldSnapshotRequest\
     \x1a\x1d.debugpb.HoldSnapshotResponse\"\0\x12V\n\x0fReleaseSnapshot\x12\
     \x1f.debugpb.ReleaseSnapshotRequest\x1a\x20.debugpb.ReleaseSnapshotRespo\
-    nse\"\0B&\n\x18com.pingcap.tikv.kvproto\xc8\xe2\x1e\x01\xe0\xe2\x1e\x01\
-    \xd0\xe2\x1e\x01J\xb77\n\x07\x12\x05\0\0\xde\x01\x01\n\x08\n\x01\x0c\x12\
+    nse\"\0B&\n\x18com.pingcap.tikv.kvproto\xe0\xe2\x1e\x01\xd0\xe2\x1e\x01\
+    \xc8\xe2\x1e\x01J\xb77\n\x07\x12\x05\0\0\xde\x01\x01\n\x08\n\x01\x0c\x12\
     \x03\0\0\x12\n\x08\n\x01\x02\x12\x03\x01\x08\x0f\n\t\n\x02\x03\0\x12\x03\
     \x03\x07\x16\n\t\n\x02\x03\x01\x12\x03\x04\x07\x16\n\t\n\x02\x03\x02\x12\
     \x03\x05\x07\x1c\n\t\n\x02\x03\x03\x12\x03\x06\x07\x1d\n\x08\n\x01\x08\

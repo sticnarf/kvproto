@@ -211,11 +211,11 @@ message HoldSnapshotRequest {
 }
 
 message HoldSnapshotResponse {
-    string snapshot_id = 1;
+    uint64 snapshot_id = 1;
 }
 
 message ReleaseSnapshotRequest {
-    string snapshot_id = 1;
+    uint64 snapshot_id = 1;
 }
 
 message ReleaseSnapshotResponse {
