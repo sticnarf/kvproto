@@ -59,6 +59,12 @@ service Debug {
 
     // dynamically modify tikv's config
     rpc ModifyTikvConfig(ModifyTikvConfigRequest) returns (ModifyTikvConfigResponse) {}
+
+    // Take a RocksDB snapshot and keeps in memory
+    rpc HoldSnapshot(HoldSnapshotRequest) returns (HoldSnapshotResponse) {}
+
+    // Release previously took memory
+    rpc ReleaseSnapshot(ReleaseSnapshotRequest) returns (ReleaseSnapshotResponse) {}
 }
 
 enum DB {
@@ -198,4 +204,20 @@ message ModifyTikvConfigRequest {
 }
 
 message ModifyTikvConfigResponse {
+}
+
+message HoldSnapshotRequest {
+    kvrpcpb.Context context = 1;
+}
+
+message HoldSnapshotResponse {
+    string snapshot_id = 1;
+}
+
+message ReleaseSnapshotRequest {
+    string snapshot_id = 1;
+}
+
+message ReleaseSnapshotResponse {
+    bool removed = 1;
 }

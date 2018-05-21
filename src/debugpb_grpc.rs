@@ -102,6 +102,20 @@ const METHOD_DEBUG_MODIFY_TIKV_CONFIG: ::grpcio::Method<super::debugpb::ModifyTi
     resp_mar: ::grpcio::Marshaller { ser: ::grpcio::pb_ser, de: ::grpcio::pb_de },
 };
 
+const METHOD_DEBUG_HOLD_SNAPSHOT: ::grpcio::Method<super::debugpb::HoldSnapshotRequest, super::debugpb::HoldSnapshotResponse> = ::grpcio::Method {
+    ty: ::grpcio::MethodType::Unary,
+    name: "/debugpb.Debug/HoldSnapshot",
+    req_mar: ::grpcio::Marshaller { ser: ::grpcio::pb_ser, de: ::grpcio::pb_de },
+    resp_mar: ::grpcio::Marshaller { ser: ::grpcio::pb_ser, de: ::grpcio::pb_de },
+};
+
+const METHOD_DEBUG_RELEASE_SNAPSHOT: ::grpcio::Method<super::debugpb::ReleaseSnapshotRequest, super::debugpb::ReleaseSnapshotResponse> = ::grpcio::Method {
+    ty: ::grpcio::MethodType::Unary,
+    name: "/debugpb.Debug/ReleaseSnapshot",
+    req_mar: ::grpcio::Marshaller { ser: ::grpcio::pb_ser, de: ::grpcio::pb_de },
+    resp_mar: ::grpcio::Marshaller { ser: ::grpcio::pb_ser, de: ::grpcio::pb_de },
+};
+
 pub struct DebugClient {
     client: ::grpcio::Client,
 }
@@ -296,6 +310,38 @@ impl DebugClient {
     pub fn modify_tikv_config_async(&self, req: &super::debugpb::ModifyTikvConfigRequest) -> ::grpcio::Result<::grpcio::ClientUnaryReceiver<super::debugpb::ModifyTikvConfigResponse>> {
         self.modify_tikv_config_async_opt(req, ::grpcio::CallOption::default())
     }
+
+    pub fn hold_snapshot_opt(&self, req: &super::debugpb::HoldSnapshotRequest, opt: ::grpcio::CallOption) -> ::grpcio::Result<super::debugpb::HoldSnapshotResponse> {
+        self.client.unary_call(&METHOD_DEBUG_HOLD_SNAPSHOT, req, opt)
+    }
+
+    pub fn hold_snapshot(&self, req: &super::debugpb::HoldSnapshotRequest) -> ::grpcio::Result<super::debugpb::HoldSnapshotResponse> {
+        self.hold_snapshot_opt(req, ::grpcio::CallOption::default())
+    }
+
+    pub fn hold_snapshot_async_opt(&self, req: &super::debugpb::HoldSnapshotRequest, opt: ::grpcio::CallOption) -> ::grpcio::Result<::grpcio::ClientUnaryReceiver<super::debugpb::HoldSnapshotResponse>> {
+        self.client.unary_call_async(&METHOD_DEBUG_HOLD_SNAPSHOT, req, opt)
+    }
+
+    pub fn hold_snapshot_async(&self, req: &super::debugpb::HoldSnapshotRequest) -> ::grpcio::Result<::grpcio::ClientUnaryReceiver<super::debugpb::HoldSnapshotResponse>> {
+        self.hold_snapshot_async_opt(req, ::grpcio::CallOption::default())
+    }
+
+    pub fn release_snapshot_opt(&self, req: &super::debugpb::ReleaseSnapshotRequest, opt: ::grpcio::CallOption) -> ::grpcio::Result<super::debugpb::ReleaseSnapshotResponse> {
+        self.client.unary_call(&METHOD_DEBUG_RELEASE_SNAPSHOT, req, opt)
+    }
+
+    pub fn release_snapshot(&self, req: &super::debugpb::ReleaseSnapshotRequest) -> ::grpcio::Result<super::debugpb::ReleaseSnapshotResponse> {
+        self.release_snapshot_opt(req, ::grpcio::CallOption::default())
+    }
+
+    pub fn release_snapshot_async_opt(&self, req: &super::debugpb::ReleaseSnapshotRequest, opt: ::grpcio::CallOption) -> ::grpcio::Result<::grpcio::ClientUnaryReceiver<super::debugpb::ReleaseSnapshotResponse>> {
+        self.client.unary_call_async(&METHOD_DEBUG_RELEASE_SNAPSHOT, req, opt)
+    }
+
+    pub fn release_snapshot_async(&self, req: &super::debugpb::ReleaseSnapshotRequest) -> ::grpcio::Result<::grpcio::ClientUnaryReceiver<super::debugpb::ReleaseSnapshotResponse>> {
+        self.release_snapshot_async_opt(req, ::grpcio::CallOption::default())
+    }
     pub fn spawn<F>(&self, f: F) where F: ::futures::Future<Item = (), Error = ()> + Send + 'static {
         self.client.spawn(f)
     }
@@ -314,6 +360,8 @@ pub trait Debug {
     fn get_metrics(&self, ctx: ::grpcio::RpcContext, req: super::debugpb::GetMetricsRequest, sink: ::grpcio::UnarySink<super::debugpb::GetMetricsResponse>);
     fn check_region_consistency(&self, ctx: ::grpcio::RpcContext, req: super::debugpb::RegionConsistencyCheckRequest, sink: ::grpcio::UnarySink<super::debugpb::RegionConsistencyCheckResponse>);
     fn modify_tikv_config(&self, ctx: ::grpcio::RpcContext, req: super::debugpb::ModifyTikvConfigRequest, sink: ::grpcio::UnarySink<super::debugpb::ModifyTikvConfigResponse>);
+    fn hold_snapshot(&self, ctx: ::grpcio::RpcContext, req: super::debugpb::HoldSnapshotRequest, sink: ::grpcio::UnarySink<super::debugpb::HoldSnapshotResponse>);
+    fn release_snapshot(&self, ctx: ::grpcio::RpcContext, req: super::debugpb::ReleaseSnapshotRequest, sink: ::grpcio::UnarySink<super::debugpb::ReleaseSnapshotResponse>);
 }
 
 pub fn create_debug<S: Debug + Send + Clone + 'static>(s: S) -> ::grpcio::Service {
@@ -365,6 +413,14 @@ pub fn create_debug<S: Debug + Send + Clone + 'static>(s: S) -> ::grpcio::Servic
     let instance = s.clone();
     builder = builder.add_unary_handler(&METHOD_DEBUG_MODIFY_TIKV_CONFIG, move |ctx, req, resp| {
         instance.modify_tikv_config(ctx, req, resp)
+    });
+    let instance = s.clone();
+    builder = builder.add_unary_handler(&METHOD_DEBUG_HOLD_SNAPSHOT, move |ctx, req, resp| {
+        instance.hold_snapshot(ctx, req, resp)
+    });
+    let instance = s.clone();
+    builder = builder.add_unary_handler(&METHOD_DEBUG_RELEASE_SNAPSHOT, move |ctx, req, resp| {
+        instance.release_snapshot(ctx, req, resp)
     });
     builder.build()
 }
