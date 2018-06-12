@@ -46,6 +46,7 @@ service Tikv {
 
     // Raft commands (tikv <-> tikv).
     rpc Raft(stream raft_serverpb.RaftMessage) returns (raft_serverpb.Done) {}
+    rpc MRaft(stream raft_serverpb.RaftMessages) returns (raft_serverpb.Done) {}
     rpc Snapshot(stream raft_serverpb.SnapshotChunk) returns (raft_serverpb.Done) {}
 
     // Region commands.
