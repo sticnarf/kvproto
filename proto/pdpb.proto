@@ -262,7 +262,13 @@ message Merge {
     metapb.Region target = 1;
 }
 
+enum SplitRegionMethod {
+    Half = 0;
+    LogicalMiddle = 1;
+}
+
 message SplitRegion {
+    SplitRegionMethod split_method = 1;
 }
 
 message RegionHeartbeatResponse {
