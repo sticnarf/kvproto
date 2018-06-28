@@ -214,4 +214,6 @@ message GetRegionPropertiesRequest {
 
 message GetRegionPropertiesResponse {
     repeated Property props = 1;
+    // The middle data key of the region.
+    string middle_key = 2;
 }
