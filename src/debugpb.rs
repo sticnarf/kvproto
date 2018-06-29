@@ -5240,8 +5240,8 @@ impl ::protobuf::reflect::ProtobufValue for GetRegionPropertiesRequest {
 pub struct GetRegionPropertiesResponse {
     // message fields
     pub props: ::protobuf::RepeatedField<Property>,
-    pub default_cf_middle_key: ::std::string::String,
-    pub write_cf_middle_key: ::std::string::String,
+    pub default_cf_middle_key: ::std::vec::Vec<u8>,
+    pub write_cf_middle_key: ::std::vec::Vec<u8>,
     // special fields
     unknown_fields: ::protobuf::UnknownFields,
     cached_size: ::protobuf::CachedSize,
@@ -5277,55 +5277,55 @@ impl GetRegionPropertiesResponse {
         &self.props
     }
 
-    // string default_cf_middle_key = 2;
+    // bytes default_cf_middle_key = 2;
 
     pub fn clear_default_cf_middle_key(&mut self) {
         self.default_cf_middle_key.clear();
     }
 
     // Param is passed by value, moved
-    pub fn set_default_cf_middle_key(&mut self, v: ::std::string::String) {
+    pub fn set_default_cf_middle_key(&mut self, v: ::std::vec::Vec<u8>) {
         self.default_cf_middle_key = v;
     }
 
     // Mutable pointer to the field.
     // If field is not initialized, it is initialized with default value first.
-    pub fn mut_default_cf_middle_key(&mut self) -> &mut ::std::string::String {
+    pub fn mut_default_cf_middle_key(&mut self) -> &mut ::std::vec::Vec<u8> {
         &mut self.default_cf_middle_key
     }
 
     // Take field
-    pub fn take_default_cf_middle_key(&mut self) -> ::std::string::String {
-        ::std::mem::replace(&mut self.default_cf_middle_key, ::std::string::String::new())
+    pub fn take_default_cf_middle_key(&mut self) -> ::std::vec::Vec<u8> {
+        ::std::mem::replace(&mut self.default_cf_middle_key, ::std::vec::Vec::new())
     }
 
-    pub fn get_default_cf_middle_key(&self) -> &str {
+    pub fn get_default_cf_middle_key(&self) -> &[u8] {
         &self.default_cf_middle_key
     }
 
-    // string write_cf_middle_key = 3;
+    // bytes write_cf_middle_key = 3;
 
     pub fn clear_write_cf_middle_key(&mut self) {
         self.write_cf_middle_key.clear();
     }
 
     // Param is passed by value, moved
-    pub fn set_write_cf_middle_key(&mut self, v: ::std::string::String) {
+    pub fn set_write_cf_middle_key(&mut self, v: ::std::vec::Vec<u8>) {
         self.write_cf_middle_key = v;
     }
 
     // Mutable pointer to the field.
     // If field is not initialized, it is initialized with default value first.
-    pub fn mut_write_cf_middle_key(&mut self) -> &mut ::std::string::String {
+    pub fn mut_write_cf_middle_key(&mut self) -> &mut ::std::vec::Vec<u8> {
         &mut self.write_cf_middle_key
     }
 
     // Take field
-    pub fn take_write_cf_middle_key(&mut self) -> ::std::string::String {
-        ::std::mem::replace(&mut self.write_cf_middle_key, ::std::string::String::new())
+    pub fn take_write_cf_middle_key(&mut self) -> ::std::vec::Vec<u8> {
+        ::std::mem::replace(&mut self.write_cf_middle_key, ::std::vec::Vec::new())
     }
 
-    pub fn get_write_cf_middle_key(&self) -> &str {
+    pub fn get_write_cf_middle_key(&self) -> &[u8] {
         &self.write_cf_middle_key
     }
 }
@@ -5348,10 +5348,10 @@ impl ::protobuf::Message for GetRegionPropertiesResponse {
                     ::protobuf::rt::read_repeated_message_into(wire_type, is, &mut self.props)?;
                 },
                 2 => {
-                    ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.default_cf_middle_key)?;
+                    ::protobuf::rt::read_singular_proto3_bytes_into(wire_type, is, &mut self.default_cf_middle_key)?;
                 },
                 3 => {
-                    ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.write_cf_middle_key)?;
+                    ::protobuf::rt::read_singular_proto3_bytes_into(wire_type, is, &mut self.write_cf_middle_key)?;
                 },
                 _ => {
                     ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
@@ -5370,10 +5370,10 @@ impl ::protobuf::Message for GetRegionPropertiesResponse {
             my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
         };
         if !self.default_cf_middle_key.is_empty() {
-            my_size += ::protobuf::rt::string_size(2, &self.default_cf_middle_key);
+            my_size += ::protobuf::rt::bytes_size(2, &self.default_cf_middle_key);
         }
         if !self.write_cf_middle_key.is_empty() {
-            my_size += ::protobuf::rt::string_size(3, &self.write_cf_middle_key);
+            my_size += ::protobuf::rt::bytes_size(3, &self.write_cf_middle_key);
         }
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
@@ -5387,10 +5387,10 @@ impl ::protobuf::Message for GetRegionPropertiesResponse {
             v.write_to_with_cached_sizes(os)?;
         };
         if !self.default_cf_middle_key.is_empty() {
-            os.write_string(2, &self.default_cf_middle_key)?;
+            os.write_bytes(2, &self.default_cf_middle_key)?;
         }
         if !self.write_cf_middle_key.is_empty() {
-            os.write_string(3, &self.write_cf_middle_key)?;
+            os.write_bytes(3, &self.write_cf_middle_key)?;
         }
         os.write_unknown_fields(self.get_unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -5439,12 +5439,12 @@ impl ::protobuf::Message for GetRegionPropertiesResponse {
                     |m: &GetRegionPropertiesResponse| { &m.props },
                     |m: &mut GetRegionPropertiesResponse| { &mut m.props },
                 ));
-                fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
+                fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeBytes>(
                     "default_cf_middle_key",
                     |m: &GetRegionPropertiesResponse| { &m.default_cf_middle_key },
                     |m: &mut GetRegionPropertiesResponse| { &mut m.default_cf_middle_key },
                 ));
-                fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
+                fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeBytes>(
                     "write_cf_middle_key",
                     |m: &GetRegionPropertiesResponse| { &m.write_cf_middle_key },
                     |m: &mut GetRegionPropertiesResponse| { &mut m.write_cf_middle_key },
@@ -5681,19 +5681,19 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     \x20\x01(\tR\x05value\"9\n\x1aGetRegionPropertiesRequest\x12\x1b\n\tregi\
     on_id\x18\x01\x20\x01(\x04R\x08regionId\"\xa8\x01\n\x1bGetRegionProperti\
     esResponse\x12'\n\x05props\x18\x01\x20\x03(\x0b2\x11.debugpb.PropertyR\
-    \x05props\x121\n\x15default_cf_middle_key\x18\x02\x20\x01(\tR\x12default\
-    CfMiddleKey\x12-\n\x13write_cf_middle_key\x18\x03\x20\x01(\tR\x10writeCf\
-    MiddleKey*#\n\x02DB\x12\x0b\n\x07INVALID\x10\0\x12\x06\n\x02KV\x10\x01\
-    \x12\x08\n\x04RAFT\x10\x02*\x90\x01\n\x06MODULE\x12\n\n\x06UNUSED\x10\0\
-    \x12\x08\n\x04KVDB\x10\x01\x12\n\n\x06RAFTDB\x10\x02\x12\x0c\n\x08READPO\
-    OL\x10\x03\x12\n\n\x06SERVER\x10\x04\x12\x0b\n\x07STORAGE\x10\x05\x12\
-    \x06\n\x02PD\x10\x06\x12\n\n\x06METRIC\x10\x07\x12\x0f\n\x0bCOPROCESSOR\
-    \x10\x08\x12\x0c\n\x08SECURITY\x10\t\x12\n\n\x06IMPORT\x10\n2\x8f\x08\n\
-    \x05Debug\x122\n\x03Get\x12\x13.debugpb.GetRequest\x1a\x14.debugpb.GetRe\
-    sponse\"\0\x12>\n\x07RaftLog\x12\x17.debugpb.RaftLogRequest\x1a\x18.debu\
-    gpb.RaftLogResponse\"\0\x12G\n\nRegionInfo\x12\x1a.debugpb.RegionInfoReq\
-    uest\x1a\x1b.debugpb.RegionInfoResponse\"\0\x12G\n\nRegionSize\x12\x1a.d\
-    ebugpb.RegionSizeRequest\x1a\x1b.debugpb.RegionSizeResponse\"\0\x12C\n\
+    \x05props\x121\n\x15default_cf_middle_key\x18\x02\x20\x01(\x0cR\x12defau\
+    ltCfMiddleKey\x12-\n\x13write_cf_middle_key\x18\x03\x20\x01(\x0cR\x10wri\
+    teCfMiddleKey*#\n\x02DB\x12\x0b\n\x07INVALID\x10\0\x12\x06\n\x02KV\x10\
+    \x01\x12\x08\n\x04RAFT\x10\x02*\x90\x01\n\x06MODULE\x12\n\n\x06UNUSED\
+    \x10\0\x12\x08\n\x04KVDB\x10\x01\x12\n\n\x06RAFTDB\x10\x02\x12\x0c\n\x08\
+    READPOOL\x10\x03\x12\n\n\x06SERVER\x10\x04\x12\x0b\n\x07STORAGE\x10\x05\
+    \x12\x06\n\x02PD\x10\x06\x12\n\n\x06METRIC\x10\x07\x12\x0f\n\x0bCOPROCES\
+    SOR\x10\x08\x12\x0c\n\x08SECURITY\x10\t\x12\n\n\x06IMPORT\x10\n2\x8f\x08\
+    \n\x05Debug\x122\n\x03Get\x12\x13.debugpb.GetRequest\x1a\x14.debugpb.Get\
+    Response\"\0\x12>\n\x07RaftLog\x12\x17.debugpb.RaftLogRequest\x1a\x18.de\
+    bugpb.RaftLogResponse\"\0\x12G\n\nRegionInfo\x12\x1a.debugpb.RegionInfoR\
+    equest\x1a\x1b.debugpb.RegionInfoResponse\"\0\x12G\n\nRegionSize\x12\x1a\
+    .debugpb.RegionSizeRequest\x1a\x1b.debugpb.RegionSizeResponse\"\0\x12C\n\
     \x08ScanMvcc\x12\x18.debugpb.ScanMvccRequest\x1a\x19.debugpb.ScanMvccRes\
     ponse\"\00\x01\x12>\n\x07Compact\x12\x17.debugpb.CompactRequest\x1a\x18.\
     debugpb.CompactResponse\"\0\x12V\n\x0fInjectFailPoint\x12\x1f.debugpb.In\
@@ -5707,7 +5707,7 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     \x10ModifyTikvConfig\x12\x20.debugpb.ModifyTikvConfigRequest\x1a!.debugp\
     b.ModifyTikvConfigResponse\"\0\x12b\n\x13GetRegionProperties\x12#.debugp\
     b.GetRegionPropertiesRequest\x1a$.debugpb.GetRegionPropertiesResponse\"\
-    \0B&\n\x18com.pingcap.tikv.kvproto\xc8\xe2\x1e\x01\xd0\xe2\x1e\x01\xe0\
+    \0B&\n\x18com.pingcap.tikv.kvproto\xc8\xe2\x1e\x01\xe0\xe2\x1e\x01\xd0\
     \xe2\x1e\x01J\x8f8\n\x07\x12\x05\0\0\xdc\x01\x01\n\x08\n\x01\x0c\x12\x03\
     \0\0\x12\n\x08\n\x01\x02\x12\x03\x01\x08\x0f\n\t\n\x02\x03\0\x12\x03\x03\
     \x07\x16\n\t\n\x02\x03\x01\x12\x03\x04\x07\x16\n\t\n\x02\x03\x02\x12\x03\
@@ -6014,15 +6014,15 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     \xd7\x01\x04\x0c\n\r\n\x05\x04\x1a\x02\0\x06\x12\x04\xd7\x01\r\x15\n\r\n\
     \x05\x04\x1a\x02\0\x01\x12\x04\xd7\x01\x16\x1b\n\r\n\x05\x04\x1a\x02\0\
     \x03\x12\x04\xd7\x01\x1e\x1f\n6\n\x04\x04\x1a\x02\x01\x12\x04\xd9\x01\
-    \x04%\x1a(\x20The\x20middle\x20data\x20key\x20of\x20the\x20default\x20cf\
+    \x04$\x1a(\x20The\x20middle\x20data\x20key\x20of\x20the\x20default\x20cf\
     .\n\n\x0f\n\x05\x04\x1a\x02\x01\x04\x12\x06\xd9\x01\x04\xd7\x01\x20\n\r\
-    \n\x05\x04\x1a\x02\x01\x05\x12\x04\xd9\x01\x04\n\n\r\n\x05\x04\x1a\x02\
-    \x01\x01\x12\x04\xd9\x01\x0b\x20\n\r\n\x05\x04\x1a\x02\x01\x03\x12\x04\
-    \xd9\x01#$\n4\n\x04\x04\x1a\x02\x02\x12\x04\xdb\x01\x04#\x1a&\x20The\x20\
-    middle\x20data\x20key\x20of\x20the\x20write\x20cf.\n\n\x0f\n\x05\x04\x1a\
-    \x02\x02\x04\x12\x06\xdb\x01\x04\xd9\x01%\n\r\n\x05\x04\x1a\x02\x02\x05\
-    \x12\x04\xdb\x01\x04\n\n\r\n\x05\x04\x1a\x02\x02\x01\x12\x04\xdb\x01\x0b\
-    \x1e\n\r\n\x05\x04\x1a\x02\x02\x03\x12\x04\xdb\x01!\"b\x06proto3\
+    \n\x05\x04\x1a\x02\x01\x05\x12\x04\xd9\x01\x04\t\n\r\n\x05\x04\x1a\x02\
+    \x01\x01\x12\x04\xd9\x01\n\x1f\n\r\n\x05\x04\x1a\x02\x01\x03\x12\x04\xd9\
+    \x01\"#\n4\n\x04\x04\x1a\x02\x02\x12\x04\xdb\x01\x04\"\x1a&\x20The\x20mi\
+    ddle\x20data\x20key\x20of\x20the\x20write\x20cf.\n\n\x0f\n\x05\x04\x1a\
+    \x02\x02\x04\x12\x06\xdb\x01\x04\xd9\x01$\n\r\n\x05\x04\x1a\x02\x02\x05\
+    \x12\x04\xdb\x01\x04\t\n\r\n\x05\x04\x1a\x02\x02\x01\x12\x04\xdb\x01\n\
+    \x1d\n\r\n\x05\x04\x1a\x02\x02\x03\x12\x04\xdb\x01\x20!b\x06proto3\
 ";
 
 static mut file_descriptor_proto_lazy: ::protobuf::lazy::Lazy<::protobuf::descriptor::FileDescriptorProto> = ::protobuf::lazy::Lazy {

@@ -215,7 +215,7 @@ message GetRegionPropertiesRequest {
 message GetRegionPropertiesResponse {
     repeated Property props = 1;
     // The middle data key of the default cf.
-    string default_cf_middle_key = 2;
+    bytes default_cf_middle_key = 2;
     // The middle data key of the write cf.
-    string write_cf_middle_key = 3;
+    bytes write_cf_middle_key = 3;
 }
