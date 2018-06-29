@@ -76,14 +76,17 @@
 */
 package kvrpcpb
 
-import proto "github.com/golang/protobuf/proto"
+import (
+	"fmt"
+	"io"
+	"math"
 
+	proto "github.com/golang/protobuf/proto"
 
-import metapb "github.com/pingcap/kvproto/pkg/metapb"
-import errorpb "github.com/pingcap/kvproto/pkg/errorpb"
+	metapb "github.com/pingcap/kvproto/pkg/metapb"
 
-
-
+	errorpb "github.com/pingcap/kvproto/pkg/errorpb"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
