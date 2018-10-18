@@ -172,13 +172,6 @@ const METHOD_PD_UPDATE_GC_SAFE_POINT: ::grpcio::Method<super::pdpb::UpdateGCSafe
     resp_mar: ::grpcio::Marshaller { ser: ::grpcio::pb_ser, de: ::grpcio::pb_de },
 };
 
-const METHOD_PD_SYNC_REGIONS: ::grpcio::Method<super::pdpb::SyncRegionRequest, super::pdpb::SyncRegionResponse> = ::grpcio::Method {
-    ty: ::grpcio::MethodType::Duplex,
-    name: "/pdpb.PD/SyncRegions",
-    req_mar: ::grpcio::Marshaller { ser: ::grpcio::pb_ser, de: ::grpcio::pb_de },
-    resp_mar: ::grpcio::Marshaller { ser: ::grpcio::pb_ser, de: ::grpcio::pb_de },
-};
-
 pub struct PdClient {
     client: ::grpcio::Client,
 }
@@ -525,14 +518,6 @@ impl PdClient {
     pub fn update_gc_safe_point_async(&self, req: &super::pdpb::UpdateGCSafePointRequest) -> ::grpcio::Result<::grpcio::ClientUnaryReceiver<super::pdpb::UpdateGCSafePointResponse>> {
         self.update_gc_safe_point_async_opt(req, ::grpcio::CallOption::default())
     }
-
-    pub fn sync_regions_opt(&self, opt: ::grpcio::CallOption) -> ::grpcio::Result<(::grpcio::ClientDuplexSender<super::pdpb::SyncRegionRequest>, ::grpcio::ClientDuplexReceiver<super::pdpb::SyncRegionResponse>)> {
-        self.client.duplex_streaming(&METHOD_PD_SYNC_REGIONS, opt)
-    }
-
-    pub fn sync_regions(&self) -> ::grpcio::Result<(::grpcio::ClientDuplexSender<super::pdpb::SyncRegionRequest>, ::grpcio::ClientDuplexReceiver<super::pdpb::SyncRegionResponse>)> {
-        self.sync_regions_opt(::grpcio::CallOption::default())
-    }
     pub fn spawn<F>(&self, f: F) where F: ::futures::Future<Item = (), Error = ()> + Send + 'static {
         self.client.spawn(f)
     }
@@ -561,7 +546,6 @@ pub trait Pd {
     fn scatter_region(&mut self, ctx: ::grpcio::RpcContext, req: super::pdpb::ScatterRegionRequest, sink: ::grpcio::UnarySink<super::pdpb::ScatterRegionResponse>);
     fn get_gc_safe_point(&mut self, ctx: ::grpcio::RpcContext, req: super::pdpb::GetGCSafePointRequest, sink: ::grpcio::UnarySink<super::pdpb::GetGCSafePointResponse>);
     fn update_gc_safe_point(&mut self, ctx: ::grpcio::RpcContext, req: super::pdpb::UpdateGCSafePointRequest, sink: ::grpcio::UnarySink<super::pdpb::UpdateGCSafePointResponse>);
-    fn sync_regions(&mut self, ctx: ::grpcio::RpcContext, stream: ::grpcio::RequestStream<super::pdpb::SyncRegionRequest>, sink: ::grpcio::DuplexSink<super::pdpb::SyncRegionResponse>);
 }
 
 pub fn create_pd<S: Pd + Send + Clone + 'static>(s: S) -> ::grpcio::Service {
@@ -654,8 +638,47 @@ pub fn create_pd<S: Pd + Send + Clone + 'static>(s: S) -> ::grpcio::Service {
     builder = builder.add_unary_handler(&METHOD_PD_UPDATE_GC_SAFE_POINT, move |ctx, req, resp| {
         instance.update_gc_safe_point(ctx, req, resp)
     });
+    builder.build()
+}
+
+const METHOD_PD_INTERNAL_SYNC_REGIONS: ::grpcio::Method<super::pdpb::SyncRegionRequest, super::pdpb::SyncRegionResponse> = ::grpcio::Method {
+    ty: ::grpcio::MethodType::Duplex,
+    name: "/pdpb.PDInternal/SyncRegions",
+    req_mar: ::grpcio::Marshaller { ser: ::grpcio::pb_ser, de: ::grpcio::pb_de },
+    resp_mar: ::grpcio::Marshaller { ser: ::grpcio::pb_ser, de: ::grpcio::pb_de },
+};
+
+pub struct PdInternalClient {
+    client: ::grpcio::Client,
+}
+
+impl PdInternalClient {
+    pub fn new(channel: ::grpcio::Channel) -> Self {
+        PdInternalClient {
+            client: ::grpcio::Client::new(channel),
+        }
+    }
+
+    pub fn sync_regions_opt(&self, opt: ::grpcio::CallOption) -> ::grpcio::Result<(::grpcio::ClientDuplexSender<super::pdpb::SyncRegionRequest>, ::grpcio::ClientDuplexReceiver<super::pdpb::SyncRegionResponse>)> {
+        self.client.duplex_streaming(&METHOD_PD_INTERNAL_SYNC_REGIONS, opt)
+    }
+
+    pub fn sync_regions(&self) -> ::grpcio::Result<(::grpcio::ClientDuplexSender<super::pdpb::SyncRegionRequest>, ::grpcio::ClientDuplexReceiver<super::pdpb::SyncRegionResponse>)> {
+        self.sync_regions_opt(::grpcio::CallOption::default())
+    }
+    pub fn spawn<F>(&self, f: F) where F: ::futures::Future<Item = (), Error = ()> + Send + 'static {
+        self.client.spawn(f)
+    }
+}
+
+pub trait PdInternal {
+    fn sync_regions(&mut self, ctx: ::grpcio::RpcContext, stream: ::grpcio::RequestStream<super::pdpb::SyncRegionRequest>, sink: ::grpcio::DuplexSink<super::pdpb::SyncRegionResponse>);
+}
+
+pub fn create_pd_internal<S: PdInternal + Send + Clone + 'static>(s: S) -> ::grpcio::Service {
+    let mut builder = ::grpcio::ServiceBuilder::new();
     let mut instance = s.clone();
-    builder = builder.add_duplex_streaming_handler(&METHOD_PD_SYNC_REGIONS, move |ctx, req, resp| {
+    builder = builder.add_duplex_streaming_handler(&METHOD_PD_INTERNAL_SYNC_REGIONS, move |ctx, req, resp| {
         instance.sync_regions(ctx, req, resp)
     });
     builder.build()

@@ -65,6 +65,9 @@ service PD {
 
     rpc UpdateGCSafePoint(UpdateGCSafePointRequest) returns (UpdateGCSafePointResponse) {}
 
+}
+
+service PDInternal {
     rpc SyncRegions(stream SyncRegionRequest) returns (stream SyncRegionResponse) {}
 }
 
