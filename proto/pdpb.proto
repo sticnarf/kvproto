@@ -69,6 +69,10 @@ service PD {
 
     rpc UpdateGCSafePoint(UpdateGCSafePointRequest) returns (UpdateGCSafePointResponse) {}
 
+    rpc GetGCSettings(GetGCSettingsRequest) returns (GetGCSettingsResponse) {}
+
+    rpc UpdateGCSettings(UpdateGCSettingsRequest) returns (UpdateGCSettingsResponse) {}
+
     rpc SyncRegions(stream SyncRegionRequest) returns (stream SyncRegionResponse) {}
 
     rpc GetOperator(GetOperatorRequest) returns (GetOperatorResponse) {}
@@ -503,6 +507,30 @@ message UpdateGCSafePointResponse {
     ResponseHeader header = 1;
 
     uint64 new_safe_point = 2;
+}
+
+message GetGCSettingsRequest {
+    RequestHeader header = 1;
+}
+
+message GetGCSettingsResponse {
+    ResponseHeader header = 1;
+
+    uint64 safe_point = 2;
+    bool keep_latest_delete = 3;
+}
+
+message UpdateGCSettingsRequest {
+    RequestHeader header = 1;
+
+    bool change_keep_last_delete = 2;
+    bool keep_last_delete = 3;
+}
+
+message UpdateGCSettingsResponse {
+    ResponseHeader header = 1;
+
+    bool keep_last_delete = 3;
 }
 
 message SyncRegionRequest{
