@@ -96,6 +96,7 @@ message Context {
     // After a region applys to `applied_index`, we can get a
     // snapshot for the region even if the peer is follower.
     uint64 applied_index = 15;
+    uint64 task_id = 16;
 }
 
 message HandleTime {
