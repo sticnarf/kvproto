@@ -4,6 +4,7 @@ package raft_cmdpb;
 import "metapb.proto";
 import "errorpb.proto";
 import "eraftpb.proto";
+import "kvrpcpb.proto";
 import "import_sstpb.proto";
 import "rustproto.proto";
 
@@ -64,10 +65,18 @@ message IngestSSTRequest {
 
 message IngestSSTResponse {}
 
-message ReadIndexRequest {}
+message ReadIndexRequest {
+    // The leader checks the given range if there is any unapplied lock
+    // blocking the read request.
+    uint64 start_ts = 1;
+    repeated kvrpcpb.KeyRange ranges = 2;
+}
 
 message ReadIndexResponse{
     uint64 read_index = 1;
+    // If `locked` is set, this read request is blocked by a lock.
+    // The lock should be returned to the client.
+    kvrpcpb.LockInfo locked = 2;
 }
 
 enum CmdType {
