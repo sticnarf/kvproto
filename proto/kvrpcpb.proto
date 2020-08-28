@@ -198,7 +198,6 @@ message CheckTxnStatusRequest {
 }
 
 message CheckTxnStatusResponse {
-    reserved 6, 7;
     errorpb.Error region_error = 1;
     KeyError error = 2;
     // Three kinds of transaction status:
@@ -209,7 +208,7 @@ message CheckTxnStatusResponse {
     uint64 commit_version = 4;
     // The action performed by TiKV (and why if the action is to rollback).
     Action action = 5;
-    LockInfo lock_info = 8;
+    LockInfo lock_info = 6;
 }
 
 // Part of the async commit protocol, checks for locks on all supplied keys. If a lock is missing,
