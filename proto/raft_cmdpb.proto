@@ -64,8 +64,7 @@ message IngestSSTRequest {
 
 message IngestSSTResponse {}
 
-message ReadIndexRequest {
-}
+message ReadIndexRequest {}
 
 message ReadIndexResponse{
     uint64 read_index = 1;
