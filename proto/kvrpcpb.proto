@@ -212,6 +212,9 @@ message CheckTxnStatusRequest {
     // If true, then TiKV will leave a rollback tombstone in the write CF for `primary_key`, even if
     // that key is not locked.
     bool rollback_if_not_exist = 6;
+    // This field is set to true only if the transaction is known to fall back from async commit.
+    // CheckTxnStatus rolls back async-commit primary locks only if this field is true.
+    bool rollback_async_commit = 7;
 }
 
 message CheckTxnStatusResponse {
