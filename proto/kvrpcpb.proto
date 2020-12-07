@@ -213,8 +213,8 @@ message CheckTxnStatusRequest {
     // that key is not locked.
     bool rollback_if_not_exist = 6;
     // This field is set to true only if the transaction is known to fall back from async commit.
-    // CheckTxnStatus rolls back async-commit primary locks only if this field is true.
-    bool rollback_async_commit = 7;
+    // CheckTxnStatus treats the transaction as non-async-commit if this field is true.
+    bool async_commit_fallback = 7;
 }
 
 message CheckTxnStatusResponse {
