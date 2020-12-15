@@ -1010,8 +1010,8 @@ message CheckLeaderResponse {
     uint64 ts = 2;
 }
 
-// Additional flags for a write request. They should be set in the `flags` field in `RaftRequestHeader`.
-enum WriteFlags {
+// Additional flags for a write batch. They should be set in the `flags` field in `RaftRequestHeader`.
+enum WriteBatchFlag {
     EMPTY = 0;
     // Indicates this request is from a 1PC transaction.
     // It helps CDC recognize 1PC transactions and handle them correctly.
