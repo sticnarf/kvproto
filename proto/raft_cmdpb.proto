@@ -314,14 +314,8 @@ message RaftRequestHeader {
     // Read requests can be responsed directly after the Raft applys to `applied_index`.
     uint64 applied_index = 9;
 
-    // Bitwise-OR of Flags
+    // Custom flags for this raft request.
     int32 flags = 10;
-    enum Flags {
-        EMPTY = 0;
-        // Indicates this request is from a 1PC transaction.
-        // It helps CDC recognize 1PC transactions and handle them correctly.
-        ONE_PC = 0x01;
-    }
 }
 
 message RaftResponseHeader {
