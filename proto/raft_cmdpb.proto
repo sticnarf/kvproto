@@ -99,11 +99,13 @@ message Request {
     DeleteRangeRequest delete_range = 8;
     IngestSSTRequest ingest_sst = 9;
     ReadIndexRequest read_index = 10;
-    Flags flags = 11;
-    message Flags {
+    // Bitwise-OR of Flags
+    uint64 flags = 11;
+    enum Flags {
+        EMPTY = 0;
         // Indicates this request is from a 1PC transaction.
         // It helps CDC recognize 1PC transactions and handle them correctly.
-        bool one_pc = 1;
+        ONE_PC = 0x01;
     }
 }
 
