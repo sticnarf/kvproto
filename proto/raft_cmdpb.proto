@@ -100,7 +100,7 @@ message Request {
     IngestSSTRequest ingest_sst = 9;
     ReadIndexRequest read_index = 10;
     // Bitwise-OR of Flags
-    uint64 flags = 11;
+    int32 flags = 11;
     enum Flags {
         EMPTY = 0;
         // Indicates this request is from a 1PC transaction.
