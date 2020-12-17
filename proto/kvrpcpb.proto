@@ -1009,11 +1009,3 @@ message CheckLeaderResponse {
     repeated uint64 regions = 1;
     uint64 ts = 2;
 }
-
-// Additional flags for a write batch. They should be set in the `flags` field in `RaftRequestHeader`.
-enum WriteBatchFlag {
-    EMPTY = 0;
-    // Indicates this request is from a 1PC transaction.
-    // It helps CDC recognize 1PC transactions and handle them correctly.
-    ONE_PC = 0x01;
-}
