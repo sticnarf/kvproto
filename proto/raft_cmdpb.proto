@@ -315,7 +315,7 @@ message RaftRequestHeader {
     uint64 applied_index = 9;
 
     // Custom flags for this raft request.
-    int32 flags = 10;
+    uint64 flags = 10;
 }
 
 message RaftResponseHeader {
