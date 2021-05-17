@@ -114,6 +114,13 @@ message DataIsNotReady {
     uint64 safe_ts = 3;
 }
 
+// `DeadlineExceeded` error is returned when the execution time of the request exceeds
+// the `max_execution_duration_ms` in `Context`.
+message DeadlineExceeded {
+    // Extra info can be put here for better diagnosis or flow control.
+    // It remains empty now because it is not clear what to put here.
+}
+
 // Error wraps all region errors, indicates an error encountered by a request.
 message Error {
     reserved "stale_epoch";
@@ -132,4 +139,5 @@ message Error {
     ReadIndexNotReady read_index_not_ready = 11;
     ProposalInMergingMode proposal_in_merging_mode = 12;
     DataIsNotReady data_is_not_ready = 13;
+    DeadlineExceeded deadline_exceeded = 14;
 }
